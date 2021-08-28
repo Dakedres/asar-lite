@@ -101,7 +101,7 @@ These paths must be absolute and posix-style, without a leading forward slash.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| Object | <code>String</code> | The asar file's manifest, containing the pointers to each index's files in the buffer |
-|  | <code>ArrayBuffer</code> | The contents of the archive, conjugated together. |
+| header | <code>Object</code> | The asar file's manifest, containing the pointers to each index's files in the buffer |
+| buffer | <code>ArrayBuffer</code> | The contents of the archive, conjugated together. |
 
 <!---jsdoc end-->
