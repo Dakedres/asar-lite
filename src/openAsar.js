@@ -32,7 +32,7 @@ const openAsar = archive => {
     /**
      * @typedef {Object} ArchiveData
      * @property {Object} header - The asar file's manifest, containing the pointers to each index's files in the buffer
-     * @property {ArrayBuffer} buffer - The contents of the archive, conjugated together.
+     * @property {ArrayBuffer} buffer - The contents of the archive, concatenated together.
      */
     return {
       header: JSON.parse( textDecoder.decode(rawHeader) ),

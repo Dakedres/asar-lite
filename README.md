@@ -3,7 +3,7 @@ A lightweight, browser-friendly library for reading Asar files.
 
 ## Overview
 asar-lite is split among two diffent utilities.
-### [openAsar.js](dist/asar.js)
+### [openAsar.js](dist/openAsar.js)
 This is the most simple utility, it exposes the [openAsar](#openAsar) function which simply breaks up the archive into it's header and file contents. Great for lazy people who want granular control.
 ### [Asar.js](dist/asar.js)
 This provides the [Asar](#Asar) class which acts as a basic interface to retrieve files from the archive, easily extensible!
