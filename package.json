@@ -1,0 +1,29 @@
+{
+  "name": "asar-lite",
+  "version": "1.0.0",
+  "description": "A lightweight, browser-friendly library for reading Asar files.",
+  "main": "dist/asar.js",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "docs": "node build-docs.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dakedres/asar-lite.git"
+  },
+  "keywords": [
+    "Asar",
+    "Electron",
+    "Web"
+  ],
+  "author": "Dakedres",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/Dakedres/asar-lite/issues"
+  },
+  "homepage": "https://github.com/Dakedres/asar-lite#readme",
+  "devDependencies": {
+    "jsdoc-to-markdown": "^7.0.1",
+    "rollup": "^2.56.3"
+  }
+}
