@@ -1,34 +1,39 @@
-const path = require('path')
+const path = require('path'),
+      { terser } = require('rollup-plugin-terser')
 
 const config = (id, name = id) => {
-  const createPath = suffix => {
-    let parts = [ id ]
+  const createPath = (...suffix) =>
+    path.join(__dirname, 'dist', [ id, ...suffix, 'js' ].join('.') )
 
-    if(suffix)
-      parts.push(suffix)
-    
-    parts.push('js')
-    
-    return path.join(__dirname, 'dist', parts.join('.') )
-  }
-
-  return {
+  const createOut = (...suffix) => ({
     input: path.join('src', id + '.js'),
     output: [
       {
-        file: createPath(),
+        file: createPath(...suffix),
         name,
         format: 'umd'
       },
       {
-        file: createPath('module'),
+        file: createPath('module', ...suffix),
         format: 'es'
       }
     ]
-  }
+  })
+
+  console.log(createPath('min'))
+
+  return [
+    createOut(),
+    Object.assign(
+      createOut('min'),
+      {
+        plugins: [ terser() ]
+      }
+    )
+  ]
 }
 
 module.exports = [
-  config('asar'),
-  config('openAsar')
+  ...config('asar'),
+  ...config('openAsar')
 ]

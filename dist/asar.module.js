@@ -15,7 +15,7 @@ const alignInt = (i, alignment) =>
  */
 const openAsar = archive => {
   if(archive.length > Number.MAX_SAFE_INTEGER)
-      throw new Error('This file is too large for AsarHandler to safely work with, sorry for the inconvenience.')
+      throw new Error('Asar archive too large.')
 
     const headerSize = new DataView(archive).getUint32(headerSizeIndex, true),
           // Pickle wants to align the headers so that the payload length is
@@ -31,8 +31,8 @@ const openAsar = archive => {
 
     /**
      * @typedef {Object} ArchiveData
-     * @property {String} Object - The asar file's manifest, containing the pointers to each index's files in the buffer
-     * @property {ArrayBuffer} - The contents of the archive, conjugated together.
+     * @property {Object} header - The asar file's manifest, containing the pointers to each index's files in the buffer
+     * @property {ArrayBuffer} buffer - The contents of the archive, concatenated together.
      */
     return {
       header: JSON.parse( textDecoder.decode(rawHeader) ),
@@ -66,6 +66,11 @@ const crawlHeader = function self(files, dirname) {
  * @typedef {String} ArchivePath
  */
 
+/**
+ * An Asar archive
+ * @class
+ * @param {ArrayBuffer} archive The archive to open
+ */
 class Asar {
   constructor(archive) {
     const { header, buffer } = openAsar(archive);
@@ -75,7 +80,11 @@ class Asar {
     this.contents = crawlHeader(header);
   }
 
-  // Only takes posix-like paths
+  /**
+   * Retrieves information on a directory or file from the archive's header
+   * @param {ArchivePath} path The path to the dirent
+   * @returns {Object}
+   */
   find(path) {
     const navigate = (currentItem, navigateTo) => {
       if(currentItem.files) {
@@ -100,8 +109,8 @@ class Asar {
   }
 
   /**
-   * 
-   * @param {ArchivePath} path The path to the file to open
+   * Open a file in the archive
+   * @param {ArchivePath} path The path to the file
    * @returns {ArrayBuffer} The file's contents
    */
   get(path) {

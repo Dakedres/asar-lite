@@ -21,7 +21,7 @@
    */
   const openAsar = archive => {
     if(archive.length > Number.MAX_SAFE_INTEGER)
-        throw new Error('This file is too large for AsarHandler to safely work with, sorry for the inconvenience.')
+        throw new Error('Asar archive too large.')
 
       const headerSize = new DataView(archive).getUint32(headerSizeIndex, true),
             // Pickle wants to align the headers so that the payload length is
@@ -37,8 +37,8 @@
 
       /**
        * @typedef {Object} ArchiveData
-       * @property {String} Object - The asar file's manifest, containing the pointers to each index's files in the buffer
-       * @property {ArrayBuffer} - The contents of the archive, conjugated together.
+       * @property {Object} header - The asar file's manifest, containing the pointers to each index's files in the buffer
+       * @property {ArrayBuffer} buffer - The contents of the archive, concatenated together.
        */
       return {
         header: JSON.parse( textDecoder.decode(rawHeader) ),
