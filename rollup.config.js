@@ -34,6 +34,6 @@ const config = (id, name = id) => {
 }
 
 module.exports = [
-  ...config('asar'),
+  ...config('Asar'),
   ...config('openAsar')
 ]
